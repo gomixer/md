@@ -198,6 +198,8 @@ document.getElementById("copyButton").addEventListener("click", async function()
             new ClipboardItem({
                 "text/html": new Blob([outputPanel.innerHTML], { type: "text/html" })
             })
+	    // clear the selection
+	    selection.removeAllRanges();
         ]);
     } catch (err) {
         console.error("Failed to copy: ", err);
