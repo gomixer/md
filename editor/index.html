@@ -184,15 +184,25 @@ Second line.</code></pre>
 			<div class="word-count"></div>
 		</div>
 		<script>
-document.getElementById("copyButton").addEventListener("click", function() {
-	const outputHTML = document.querySelector("#preview").innerHTML;
-	const tempTextArea = document.createElement("textarea");
-	tempTextArea.value = outputHTML;
-	document.body.appendChild(tempTextArea);
-	tempTextArea.select();
-	tempTextArea.setSelectionRange(0, 99999); // For mobile compatibility
-	document.execCommand("copy");
-	document.body.removeChild(tempTextArea);
+document.getElementById("copyButton").addEventListener("click", async function() {
+    try {
+        const outputPanel = document.querySelector("#preview");
+        // create a range and selection to capture the content
+        const range = document.createRange();
+        range.selectNodeContents(outputPanel);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        // use the Clipboard API to write the selected HTML
+        await navigator.clipboard.write([
+            new ClipboardItem({
+                "text/html": new Blob([outputPanel.innerHTML], { type: "text/html" })
+            })
+        ]);
+    } catch (err) {
+        console.error("Failed to copy: ", err);
+        alert("Failed to copy content");
+    }
 });
 		</script>
 	</body>
