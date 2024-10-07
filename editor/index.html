@@ -156,6 +156,7 @@ Second line.</code></pre>
 						<div class="button-group">
 							<a href="#" class="button switch" data-switchto="html">HTML</a>
 							<a href="#" class="button switch" data-switchto="preview">Preview</a>
+							<a href="#" class="button " id="copyButton">📋</a>
 						</div>
 						<a href="#" class="button icon-sync-scroll feature" data-feature="sync-scroll" title="Toggle sync-scrolling (when enabled, the preview panel will automatically scroll with the left panel)"></a>
 						<a href="#" class="button icon-fullscreen feature" data-feature="fullscreen" data-tofocus="" title="Go fullscreen"></a><!-- data-tofocus is set dynamically by the HTML/preview switch -->
@@ -174,7 +175,7 @@ Second line.</code></pre>
 					<a href="#" class="button switch" data-switchto="markdown">Markdown</a>
 					<a href="#" class="button switch" data-switchto="html">HTML</a>
 					<a href="#" class="button switch" data-switchto="preview">Preview</a>
-					<a href="#" class="button " id="copyButton">📋</a> <!-- Copy button -->
+					<a href="#" class="button " id="copyButton">📋</a>
 				</div>
 				<a href="#" class="button icon-fullscreen feature" data-feature="fullscreen" title="Exit fullscreen"></a>
 			</div>
@@ -184,9 +185,9 @@ Second line.</code></pre>
 		</div>
 		<script>
 document.getElementById("copyButton").addEventListener("click", function() {
-	const outputText = document.querySelector("#preview").innerText;
+	const outputHTML = document.querySelector("#preview").innerHTML;
 	const tempTextArea = document.createElement("textarea");
-	tempTextArea.value = outputText;
+	tempTextArea.value = outputHTML;
 	document.body.appendChild(tempTextArea);
 	tempTextArea.select();
 	tempTextArea.setSelectionRange(0, 99999); // For mobile compatibility
